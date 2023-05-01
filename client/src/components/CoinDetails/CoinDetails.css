@@ -1,0 +1,73 @@
+.CoinDetails {
+  display: flex;
+  gap: 3rem;
+  max-width: 78.2rem;
+  margin: 4.8rem auto;
+}
+
+.ImgWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.ImgCoin {
+  max-width: 30rem;
+}
+
+.InfoWrapper {
+  padding: 2rem 4.3rem;
+  background: rgba(196, 196, 196, 0.5);
+  position: relative;
+}
+
+.InfoCoin_Title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.InfoCoin_Content {
+  margin-bottom: 4rem;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+}
+
+.InfoCoin_Content p:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.InfoCoin_Table {
+  width: 100%;
+}
+
+.InfoCoin_Table tr:nth-child(odd) {
+  background: #fff;
+}
+
+.InfoCoin_Table tr {
+  display: flex;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.InfoCoin_Table th,
+.InfoCoin_Table td {
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.3rem;
+  flex: 1;
+}
+
+.InfoCoin_Table th {
+  text-align: start;
+  border-right: 1px solid #c4c4c4;
+}
+
+.InfoCoin_BackTo {
+  display: inline-block;
+  font-size: 1rem;
+  color: #000;
+
+  position: absolute;
+  bottom: 2rem;
+}

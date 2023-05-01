@@ -1,0 +1,71 @@
+.AdvancedFilter {
+  display: grid;
+  grid-template-columns: 37.4rem 38.5rem;
+  row-gap: 2rem;
+  column-gap: 3rem;
+}
+
+.Form_Control .Form_Label {
+  font-size: 1.4rem;
+  display: inline-block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.Form_InputBox select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.Form_InputBox.SelectInput {
+  position: relative;
+}
+
+.SelectInput select {
+  background: transparent !important;
+}
+
+.Form_InputBox.SelectInput::before {
+  content: " ";
+  position: absolute;
+  background: url("./arrow.svg");
+  background-position: center;
+  background-size: cover;
+  width: 1.4rem;
+  height: 0.8rem;
+  top: 2.1rem;
+  right: 2.1rem;
+  z-index: -999;
+}
+
+.Form_Input {
+  width: 100%;
+  font-size: 1.6rem;
+  font-family: inherit;
+  padding: 1.4rem;
+  outline: none;
+  border: 1px solid #000;
+}
+
+.Form_DoubleInput {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Form_DoubleInput .Form_Input {
+  max-width: 15.5rem;
+}
+
+.Form_DoubleInput small {
+  font-size: 1.4rem;
+  font-weight: 300;
+  margin-right: 0.7rem;
+}
+
+.Form_DoubleInput input::-webkit-outer-spin-button,
+.Form_DoubleInput input::-webkit-inner-spin-button {
+  display: none; /* <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /*<-- Apparently some margin are still there even though it's hidden */
+}

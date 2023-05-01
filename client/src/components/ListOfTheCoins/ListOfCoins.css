@@ -1,0 +1,38 @@
+.Coins {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  /* column-gap: 15rem; */
+}
+
+.Coin {
+  display: flex;
+  gap: 3rem;
+  flex: auto;
+}
+
+.Coin a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.Coin_ImgWrapper {
+  max-width: 12rem;
+}
+
+.Coin_ImgWrapper img {
+  width: 100%;
+  height: 100%;
+}
+
+.CoinInfo {
+  max-width: 21.3rem;
+  font-size: 1.2rem;
+}
+
+.CoinInfo h5 {
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: #833ae0;
+}

@@ -1,0 +1,65 @@
+.SearchInput {
+  margin-bottom: 6rem;
+}
+
+.SearchInput label,
+.SearchInput button,
+.ShowFilter {
+  font-size: 1.4rem;
+}
+
+.SearchInput label {
+  display: inline-block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.SearchInput .SearchBar {
+  display: flex;
+  gap: 3rem;
+  margin-bottom: 1rem;
+}
+
+.SearchBar button,
+.SearchBar input {
+  font-family: inherit;
+  padding: 1.4rem;
+  outline: none;
+}
+
+.SearchBar input {
+  flex-basis: 37.4rem;
+  font-size: 1.6rem;
+  border: 1px solid #000;
+}
+
+.SearchInput .SearchButton,
+.SearchInput .ShowFilter {
+  border: none;
+  outline: none;
+}
+
+.SearchInput .SearchButton {
+  flex-basis: 12rem;
+  background-color: #833ae0;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.SearchInput .SearchButton:hover {
+  background-color: rgb(111, 50, 190);
+}
+
+.SearchInput .ShowFilter {
+  background: none;
+}
+
+.ShowFilter a {
+  font-weight: 300;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: inherit;
+}
