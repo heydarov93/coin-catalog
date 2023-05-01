@@ -5,7 +5,7 @@ const Category = ({ id, name, img }) => {
     <div className="Category">
       <h5 className="Category_Title">{name}</h5>
       <div className="Category_ShowAll">
-        <Link to={`/coins/?cat=${id}`}>
+        <Link to={`/coins?cat=${id}`}>
           <small>Show all </small>
         </Link>
         <svg

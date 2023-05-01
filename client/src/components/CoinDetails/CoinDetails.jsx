@@ -1,18 +1,41 @@
 import ImgCoin from "./ImgCoin";
 import InfoCoin from "./InfoCoin";
 import "./CoinDetails.css";
+import { useEffect, useState } from "react";
+import { fetchCoinById } from "../../api/fetchData";
+import { useParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
+
 const CoinDetails = () => {
-  const img1 = `https://firebasestorage.googleapis.com/v0/b/coin-info-93.appspot.com/o/Canadian%20Beaver_1.png?alt=media&token=afbc2d60-686f-4b1f-b84a-91271b7ea863`;
-  const img2 = `https://firebasestorage.googleapis.com/v0/b/coin-info-93.appspot.com/o/Canadian%20Beaver_2.png?alt=media&token=904a4789-a46e-4074-b7ff-1128e4818bc9`;
+  const [coin, setCoin] = useState({});
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetchCoinById(id).then((data) => setCoin(...data));
+  }, []);
 
   return (
     <section className="CoinDetails">
       <div className="ImgWrapper">
-        <ImgCoin img={img1} />
-        <ImgCoin img={img2} />
+        <ImgCoin img={coin.coin_img1} />
+        <ImgCoin img={coin.coin_img2} />
       </div>
       <div className="InfoWrapper">
-        <InfoCoin />
+        <InfoCoin
+          name={coin.coin_name}
+          desc={coin.coin_shortDesc}
+          text1={coin.coin_longDesc1}
+          text2={coin.coin_longDesc2}
+          country={coin.coin_country}
+          composition={coin.coin_composition}
+          quality={coin.coin_quality}
+          denomination={coin.coin_denomination}
+          year={coin.coin_year}
+          weight={coin.coin_weight}
+          price={coin.coin_price}
+          backPath={searchParams.get("back_path")}
+        />
       </div>
     </section>
   );

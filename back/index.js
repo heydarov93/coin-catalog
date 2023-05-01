@@ -31,7 +31,23 @@ app.get("/categories", (req, res) => {
 
 app.get("/coins", (req, res) => {
   const categoryId = req.query.cat;
+  connection.query(`SELECT * from coins WHERE coin_category=${categoryId};`, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.json(result);
+  });
 });
+
+app.get("/coins/:id", (req, res) => {
+  const coinId = req.params.id
+  connection.query(`SELECT * FROM coins WHERE id=${coinId};`, (err, result) => {
+    if(err) {
+      throw err
+    }
+    res.send(result);
+  })
+})
 
 app.listen(PORT, (err) => {
   if (err) console.log("Error during listening port: ", err);

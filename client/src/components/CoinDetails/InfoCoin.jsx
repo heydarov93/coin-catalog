@@ -1,61 +1,60 @@
 import { Link } from "react-router-dom";
 
-const InfoCoin = () => {
+const InfoCoin = ({
+  name,
+  desc,
+  text1,
+  text2,
+  country,
+  composition,
+  quality,
+  denomination,
+  year,
+  weight,
+  price,
+  backPath
+}) => {
   return (
     <>
-      <h2 className="InfoCoin_Title">Canadian Beaver</h2>
+      <h2 className="InfoCoin_Title">{name}</h2>
       <div className="InfoCoin_Content">
-        <p className="InfoCoin_Desc">
-          "Canadian beaver". Unique coin with the image of a beaver. Face value
-          - 5 cents. Created under Elizabeth II.
-        </p>
-        <p className="InfoCoin_Text-1">
-          In the center of the obverse is a portrait of Queen Elizabeth II, the
-          profile is directed to the right. The inscription on the left
-          semicircle (English) ELIZABETH II, on the right semicircle D · G ·
-          REGINA (ELIZABETH II QUEEN by the Grace of GOD) with dots. Below is a
-          mint mark.
-        </p>
-        <p className="InfoCoin_Text-2">
-          In the center of the coin reverse is a Canadian beaver on a rock
-          sticking out of the water. At the top is a semicircle with the
-          inscription "5 cents" between two maple leaves. At the bottom in two
-          lines is the inscription CANADA (CANADA) and the year of minting.
-        </p>
+        <p className="InfoCoin_Desc">{desc}</p>
+        <p className="InfoCoin_Text-1">{text1}</p>
+        <p className="InfoCoin_Text-2">{text2}</p>
       </div>
       <table className="InfoCoin_Table">
         <tbody>
           <tr>
             <th>Issuing Country</th>
-            <td>CANADA</td>
+            <td>{country}</td>
           </tr>
           <tr>
             <th>Composition</th>
-            <td>Nickel</td>
+            <td>{composition}</td>
           </tr>
           <tr>
             <th>Quality</th>
-            <td>BU</td>
+            <td>{quality}</td>
           </tr>
           <tr>
             <th>Denomination</th>
-            <td>5 cents</td>
+            <td>{denomination}</td>
           </tr>
           <tr>
             <th>Year</th>
-            <td>1965</td>
+            <td>{year}</td>
           </tr>
           <tr>
             <th>Weight</th>
-            <td>4.54 g</td>
+            <td>{weight}</td>
           </tr>
           <tr>
             <th>Price</th>
-            <td>40$</td>
+            <td>{price}</td>
           </tr>
         </tbody>
       </table>
-      <Link to="../" className="InfoCoin_BackTo">
+      <Link to={`../?${backPath}`} className="InfoCoin_BackTo">
         Back to the list
       </Link>
     </>
