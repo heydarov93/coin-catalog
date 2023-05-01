@@ -28,7 +28,14 @@ const Home = () => {
       {showFilter || (
         <div className="Home_Categories">
           {categories.map((item) => {
-            return <Category key={item.id} name={item.name} img={item.img} />;
+            return (
+              <Category
+                key={item.id}
+                name={item.name}
+                img={item.img}
+                id={item.id}
+              />
+            );
           })}
         </div>
       )}

@@ -1,11 +1,13 @@
 import "./Category.css";
-
+import { Link } from "react-router-dom";
 const Category = ({ id, name, img }) => {
   return (
     <div className="Category">
       <h5 className="Category_Title">{name}</h5>
       <div className="Category_ShowAll">
-        <small>Show all </small>
+        <Link to={`/coins/?cat=${id}`}>
+          <small>Show all </small>
+        </Link>
         <svg
           width="6"
           height="11"

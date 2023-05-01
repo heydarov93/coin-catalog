@@ -29,6 +29,10 @@ app.get("/categories", (req, res) => {
   });
 });
 
+app.get("/coins", (req, res) => {
+  const categoryId = req.query.cat;
+});
+
 app.listen(PORT, (err) => {
   if (err) console.log("Error during listening port: ", err);
   console.log(`Listening PORT ${PORT}`);

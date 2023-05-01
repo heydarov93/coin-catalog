@@ -13,7 +13,12 @@
   gap: 0.5rem;
 }
 
-.Category_ShowAll small {
+.Category_ShowAll a {
+  text-decoration: none;
+  color: #000;
+}
+
+.Category_ShowAll a small {
   font-size: 1.4rem;
   font-weight: 300;
 }
