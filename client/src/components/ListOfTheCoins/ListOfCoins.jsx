@@ -3,18 +3,24 @@ import { fetchCoinsByCategory } from "../../api/fetchData";
 import SearchForm from "../SearchForm/SearchForm";
 import Coin from "./Coin";
 import "./ListOfCoins.css";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import NavigationPath from "../NavigationPath/NavigationPath";
 
 const ListOfCoins = ({ onClickFilter, showFilter }) => {
   const [listCoins, setListCoins] = useState(null);
   const [queryParams, setQueryParams] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const location = useLocation();
   useEffect(() => {
-    const queryString = `cat=${searchParams.get("cat")}`;
-    setQueryParams(queryString);
-    fetchCoinsByCategory(queryString).then((data) => setListCoins(data));
+    const categoryId = searchParams.get("cat")
+    // if (categoryId){
+      const queryString = `cat=${categoryId}`;
+      setQueryParams(queryString);
+      fetchCoinsByCategory(queryString).then((data) => setListCoins(data));
+    // }
+
+  //  console.log(location.state.qString)
+
   }, []);
 
   return (

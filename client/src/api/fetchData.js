@@ -29,3 +29,13 @@ export const fetchCoinById = async (id) => {
     console.log(`Error occured: ${err}`);
   }
 };
+
+export const fetchCoinsBySearch = async (queryString) => {
+  try {
+    const res = await fetch(`${BASE_URL}/?s=${queryString}`);
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.log(`Error occured: ${err}`);
+  }
+};

@@ -32,7 +32,7 @@ app.get("/categories", (req, res) => {
 app.get("/coins", (req, res) => {
   const categoryId = req.query.cat;
   connection.query(
-    `SELECT * from coins WHERE coin_category=${categoryId};`,
+    `SELECT * from coins WHERE coin_category='${categoryId}';`,
     (err, result) => {
       if (err) {
         throw err;
@@ -45,7 +45,7 @@ app.get("/coins", (req, res) => {
 app.get("/coins/:id", (req, res) => {
   const coinId = req.params.id;
 
-  connection.query(`SELECT * FROM coins WHERE id=${coinId};`, (err, result) => {
+  connection.query(`SELECT * FROM coins WHERE id='${coinId}';`, (err, result) => {
     if (err) {
       throw err;
     }
@@ -74,21 +74,21 @@ app.get("/", (req, res) => {
 
   connection.query(selectByName, (err, result) => {
     if (err) {
-      throw err;
+      res.status(404).send();
     }
     data.push(...result);
   });
 
   connection.query(selectByShortDesc, (err, result) => {
     if (err) {
-      throw err;
+      res.status(404).send();
     }
     data.push(...result);
   });
 
   connection.query(selectByLongDesc, (err, result) => {
     if (err) {
-      throw err;
+      res.status(404).send();
     }
     data.push(...result);
 
@@ -101,7 +101,7 @@ app.get("/", (req, res) => {
         `SELECT * FROM coins WHERE id=${id}`,
         (err, finalResult) => {
           if (err) {
-            throw err;
+            res.status(404).send();
           }
           finalData.push(...finalResult);
           idx === arr.length - 1 && res.json(finalData);
