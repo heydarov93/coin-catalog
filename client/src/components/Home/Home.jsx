@@ -5,15 +5,10 @@ import Category from "../Category/Category";
 import AdvancedFilter from "../AdvancedFilter/AdvancedFilter";
 import SearchInput from "../SearchInput/SearchInput";
 import SearchForm from "../SearchForm/SearchForm";
+import NavigationPath from "../NavigationPath/NavigationPath";
 
-const Home = () => {
+const Home = ({ onClickFilter, showFilter }) => {
   const [categories, setCategories] = useState([]);
-  const [showFilter, setShowFilter] = useState(false);
-
-  const onClickFilter = (e) => {
-    e.preventDefault();
-    setShowFilter(!showFilter);
-  };
 
   useEffect(() => {
     fetchCategories().then((data) => {
@@ -23,7 +18,7 @@ const Home = () => {
 
   return (
     <div className="Container">
-      <h1 className="Title">Home Page</h1>
+      <h1 className="Home_Title Title">HomePage</h1>
       <SearchForm onClickFilter={onClickFilter} showFilter={showFilter} />
       {showFilter || (
         <div className="Home_Categories">

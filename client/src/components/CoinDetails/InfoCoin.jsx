@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const InfoCoin = ({
   name,
   desc,
-  text1,
-  text2,
   country,
   composition,
   quality,
@@ -12,15 +10,24 @@ const InfoCoin = ({
   year,
   weight,
   price,
-  backPath
+  textContent,
+  backPath,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <h2 className="InfoCoin_Title">{name}</h2>
       <div className="InfoCoin_Content">
         <p className="InfoCoin_Desc">{desc}</p>
-        <p className="InfoCoin_Text-1">{text1}</p>
-        <p className="InfoCoin_Text-2">{text2}</p>
+        {textContent &&
+          textContent.map((textObj) => {
+            return (
+              <p key={textObj.desc_id} className="InfoCoin_Text-1">
+                {textObj.desc_text}
+              </p>
+            );
+          })}
       </div>
       <table className="InfoCoin_Table">
         <tbody>
@@ -54,7 +61,8 @@ const InfoCoin = ({
           </tr>
         </tbody>
       </table>
-      <Link to={`../?${backPath}`} className="InfoCoin_BackTo">
+      {/* FIXME */}
+      <Link onClick={() => navigate(-1)} className="InfoCoin_BackTo">
         Back to the list
       </Link>
     </>

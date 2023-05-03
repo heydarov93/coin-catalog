@@ -1,0 +1,21 @@
+.NavigationPath {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  color: #b1abab;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 1.6rem;
+}
+
+.NavigationPath a {
+  color: inherit;
+}
+
+.NavigationPath li {
+  transition: all 0.3s ease;
+}
+
+.NavigationPath li:not(:nth-child(2)):hover {
+  color: #000;
+}

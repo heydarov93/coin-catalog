@@ -1,3 +1,7 @@
 .Home_Categories {
   display: flex;
 }
+
+.Home_Title {
+  margin-bottom: 2.5rem !important;
+}

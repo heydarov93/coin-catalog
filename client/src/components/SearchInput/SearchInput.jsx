@@ -1,6 +1,6 @@
 import "./SearchInput.css";
 
-const SearchInput = ({ onClickFilter, showFilter }) => {
+const SearchInput = ({ onClickFilter, showFilter, name, value, onChange }) => {
   const filterArrow = showFilter ? (
     <svg
       width="14"
@@ -27,8 +27,10 @@ const SearchInput = ({ onClickFilter, showFilter }) => {
     <div className="SearchInput">
       <label htmlFor="">Input field</label>
       <div className="SearchBar">
-        <input type="text" />
-        <button className="SearchButton">Search</button>
+        <input type="text" name={name} value={value} onChange={onChange} />
+        <button type="submit" className="SearchButton">
+          Search
+        </button>
       </div>
       <button className="ShowFilter" onClick={onClickFilter}>
         <a href="#">Advanced Filter {filterArrow}</a>

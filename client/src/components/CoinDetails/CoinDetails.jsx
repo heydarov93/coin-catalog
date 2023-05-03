@@ -25,8 +25,7 @@ const CoinDetails = () => {
         <InfoCoin
           name={coin.coin_name}
           desc={coin.coin_shortDesc}
-          text1={coin.coin_longDesc1}
-          text2={coin.coin_longDesc2}
+          textContent={coin.descriptions}
           country={coin.coin_country}
           composition={coin.coin_composition}
           quality={coin.coin_quality}

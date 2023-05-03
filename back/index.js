@@ -31,23 +31,85 @@ app.get("/categories", (req, res) => {
 
 app.get("/coins", (req, res) => {
   const categoryId = req.query.cat;
-  connection.query(`SELECT * from coins WHERE coin_category=${categoryId};`, (err, result) => {
-    if (err) {
-      throw err;
+  connection.query(
+    `SELECT * from coins WHERE coin_category=${categoryId};`,
+    (err, result) => {
+      if (err) {
+        throw err;
+      }
+      res.json(result);
     }
-    res.json(result);
-  });
+  );
 });
 
 app.get("/coins/:id", (req, res) => {
-  const coinId = req.params.id
+  const coinId = req.params.id;
+
   connection.query(`SELECT * FROM coins WHERE id=${coinId};`, (err, result) => {
-    if(err) {
-      throw err
+    if (err) {
+      throw err;
     }
-    res.send(result);
-  })
-})
+
+    connection.query(
+      `SELECT * FROM coin_descriptions WHERE desc_coinId=${coinId}`,
+      (err, result2) => {
+        if (err) {
+          throw err;
+        }
+
+        result = [{ ...result[0], descriptions: result2 }];
+        res.json(result);
+      }
+    );
+  });
+});
+
+app.get("/", (req, res) => {
+  const { s, price, year, country, metal, quality } = req.query;
+  const selectByName = `SELECT id FROM coins WHERE coin_name LIKE '%${s}%';`;
+  const selectByShortDesc = `SELECT id FROM coins WHERE coin_shortDesc LIKE '%${s}%';`;
+  const selectByLongDesc = `SELECT id FROM coins JOIN coin_descriptions ON desc_coinId=id WHERE desc_text LIKE '%${s}%';`;
+
+  const data = [];
+
+  connection.query(selectByName, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    data.push(...result);
+  });
+
+  connection.query(selectByShortDesc, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    data.push(...result);
+  });
+
+  connection.query(selectByLongDesc, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    data.push(...result);
+
+    const dataSet = new Set();
+    data.forEach((obj) => dataSet.add(obj.id));
+    const finalData = [];
+
+    Array.from(dataSet).forEach((id, idx, arr) => {
+      connection.query(
+        `SELECT * FROM coins WHERE id=${id}`,
+        (err, finalResult) => {
+          if (err) {
+            throw err;
+          }
+          finalData.push(...finalResult);
+          idx === arr.length - 1 && res.json(finalData);
+        }
+      );
+    });
+  });
+});
 
 app.listen(PORT, (err) => {
   if (err) console.log("Error during listening port: ", err);
