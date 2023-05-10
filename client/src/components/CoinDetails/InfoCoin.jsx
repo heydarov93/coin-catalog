@@ -13,8 +13,6 @@ const InfoCoin = ({
   textContent,
   backPath,
 }) => {
-  const navigate = useNavigate();
-
   return (
     <>
       <h2 className="InfoCoin_Title">{name}</h2>
@@ -61,8 +59,7 @@ const InfoCoin = ({
           </tr>
         </tbody>
       </table>
-      {/* FIXME */}
-      <Link onClick={() => navigate(-1)} className="InfoCoin_BackTo">
+      <Link to={`../?${backPath}`} className="InfoCoin_BackTo">
         Back to the list
       </Link>
     </>

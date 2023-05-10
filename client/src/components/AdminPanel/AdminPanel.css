@@ -1,0 +1,58 @@
+.AdminPanel .Title {
+  margin-bottom: 2.5rem;
+}
+
+.Admin_Coins .Coin_Container {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
+}
+
+.Admin_Coins .Coin_Container .Coin {
+  flex: none;
+}
+
+.Admin_Coins .Coin_Container button {
+  font-size: 1.4rem;
+  padding: 1.6rem 4rem;
+  background: #e5e5e5;
+  border: none;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.Admin_Coins .Coin_Container button:hover {
+  filter: brightness(0.9);
+}
+
+.Add_Coin {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.Add_Coin i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12rem;
+  height: 12rem;
+  border: 0.1rem solid #000;
+  border-radius: 50%;
+  font-style: normal;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.Add_Coin i:hover {
+  background: #e5e5e5;
+}
+
+.Add_Coin span {
+  font-size: 1.4rem;
+  text-decoration: underline;
+  cursor: pointer;
+}

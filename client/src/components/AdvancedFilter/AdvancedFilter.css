@@ -3,6 +3,7 @@
   grid-template-columns: 37.4rem 38.5rem;
   row-gap: 2rem;
   column-gap: 3rem;
+  margin-bottom: 4.8rem;
 }
 
 .Form_Control .Form_Label {

@@ -30,9 +30,27 @@ export const fetchCoinById = async (id) => {
   }
 };
 
-export const fetchCoinsBySearch = async (queryString) => {
+export const fetchCoinsBySearch = async (searchDetails) => {
   try {
-    const res = await fetch(`${BASE_URL}/?s=${queryString}`);
+    const res = await fetch(`${BASE_URL}/search`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(searchDetails),
+    });
+
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    console.log(`Error occured: ${err}`);
+  }
+};
+
+export const fetchSomeColumns = async (url) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${url}`);
     const data = await res.json();
     return data;
   } catch (err) {
