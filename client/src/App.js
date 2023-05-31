@@ -5,7 +5,7 @@ import ListOfCoins from "./components/ListOfTheCoins/ListOfCoins";
 import { Routes, Route } from "react-router";
 import { useState } from "react";
 import AdminPanel from "./components/AdminPanel/AdminPanel";
-import AddCoin from "./components/AdminPanel/AddCoin";
+import AddEditCoin from "./components/AdminPanel/AddEditCoin";
 
 function App() {
   const [showFilter, setShowFilter] = useState(false);
@@ -29,7 +29,8 @@ function App() {
           {/* Admin Route  */}
           <Route path="admin">
             <Route index element={<AdminPanel />} />
-            <Route path="add-coin" element={<AddCoin />} />
+            <Route path="add" element={<AddEditCoin />} />
+            <Route path="edit" element={<AddEditCoin />} />
           </Route>
           {/* Coins route  */}
           <Route path="/coins">

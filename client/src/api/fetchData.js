@@ -57,3 +57,16 @@ export const fetchSomeColumns = async (url) => {
     console.log(`Error occured: ${err}`);
   }
 };
+
+export const fetchDenominationUnits = async (queryString) => {
+  try {
+    const res = await fetch(
+      `${BASE_URL}/coins/denomination/units?s=${queryString}`
+    );
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    console.log(`Error on fetching denomination units: ${err}`);
+  }
+};

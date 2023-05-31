@@ -56,3 +56,126 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* ******************* */
+/* Add Edit Coin Page */
+/* ***************** */
+.AddEditCoin {
+  display: flex;
+  gap: 3rem;
+}
+
+.InputColumn {
+  flex: 0 1 37.4rem;
+}
+
+.InputColumn:nth-child(3) {
+  flex-basis: 30rem;
+}
+
+.Form_Control:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.Value_Unit_Wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  /* position: relative; */
+}
+
+.Value_Unit_Wrapper .Form_Control {
+  margin-bottom: 0;
+  flex: 1 1 auto;
+}
+
+.Value_Unit_Wrapper .Denomination_Unit {
+  flex: 0 1 7.4rem;
+}
+
+.Value_Unit_Wrapper #denomination_UnitList {
+  position: absolute;
+  box-shadow: 0 0.4rem 1rem rgba(0, 0, 0, 0.5);
+  background: #fff;
+  height: 10rem;
+  overflow: hidden;
+  overflow-y: scroll;
+  list-style-type: none;
+  font-size: 1.6rem;
+  z-index: 999999;
+}
+
+#denomination_UnitList li {
+  padding: 0.3rem;
+  padding-left: 1.1rem;
+}
+
+#denomination_UnitList li:hover {
+  background-color: #e5e5e5;
+}
+
+.Form_Textarea {
+  height: 13.6rem;
+  resize: none;
+}
+
+.LongDesc_LabelWrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.Delete_LongDesc,
+#addLongDescField {
+  padding-inline: 0.6rem;
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.3s ease;
+}
+
+#addLongDescField {
+  width: 2rem;
+  height: 1.7rem;
+  font-size: 1.4rem;
+  background-color: #63e6be;
+  margin-bottom: 0.3rem;
+}
+
+.Delete_LongDesc:hover,
+#addLongDescField:hover {
+  filter: brightness(0.9);
+}
+
+.Form_InputBox.LongDescriptions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+.LongDescriptions .LongDesc_Wrapper {
+  position: relative;
+  width: 100%;
+  height: 13.6rem;
+}
+
+.Delete_LongDesc {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(100%);
+  background-color: #ffa8a8;
+  font-size: 1.2rem;
+  font-weight: 500;
+
+  width: 1.6rem;
+  height: 1.6rem;
+  z-index: 99999;
+}

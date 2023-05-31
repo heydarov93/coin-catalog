@@ -27,7 +27,13 @@ const SearchInput = ({ onClickFilter, showFilter, name, value, onChange }) => {
     <div className="SearchInput">
       <label htmlFor="">Input field</label>
       <div className="SearchBar">
-        <input type="text" name={name} value={value} onChange={onChange} />
+        <input
+          type="text"
+          name={name}
+          value={value}
+          onChange={onChange}
+          autoComplete="off"
+        />
         <button type="submit" className="SearchButton">
           Search
         </button>

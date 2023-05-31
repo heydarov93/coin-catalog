@@ -19,6 +19,18 @@ const AdminPanel = () => {
     setSearchInput("");
   };
 
+  const addCoin = (e) => {
+    if (e.target.id !== "AddCoin") {
+      navigate("/admin/add");
+    }
+  };
+
+  const editCoin = (e) => {
+    e.preventDefault();
+    const { id } = e.target;
+    navigate(`/admin/edit?id=${id}`);
+  };
+
   useEffect(() => {
     const searchValue = Object.fromEntries(searchParams);
     const sizeOfSearchValue = Object.keys(searchValue).length;
@@ -27,12 +39,6 @@ const AdminPanel = () => {
       fetchCoinsBySearch(searchValue).then((data) => setListCoins(data));
     }
   }, [searchParams]);
-
-  const addCoin = (e) => {
-    if (e.target.id !== "AddCoin") {
-      navigate("/admin/add-coin");
-    }
-  };
 
   return (
     <div className="Container AdminPanel">
@@ -46,6 +52,7 @@ const AdminPanel = () => {
               name="searchInput"
               value={searchInput}
               onChange={onChange}
+              autoComplete="off"
             />
             <button type="submit" className="SearchButton">
               Search
@@ -65,8 +72,12 @@ const AdminPanel = () => {
                   coinDesc={item.coin_shortDesc}
                   // queryString={queryParams}
                 />
-                <button className="Coin_Edit">Edit</button>
-                <button className="Coin_Delete">Delete</button>
+                <button onClick={editCoin} id={item.id} className="Coin_Edit">
+                  Edit
+                </button>
+                <button id={item.id} className="Coin_Delete">
+                  Delete
+                </button>
               </div>
             );
           })}
