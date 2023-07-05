@@ -28,3 +28,12 @@ body {
   font-size: 5rem;
   font-weight: 300;
 }
+
+.Form_Control.Warning .Form_Input {
+  border: 0.1rem solid #ff0000 !important;
+}
+
+.Form_Control.Warning .Form_Label {
+  display: flex;
+  justify-content: space-between;
+}

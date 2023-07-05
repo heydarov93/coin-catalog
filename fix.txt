@@ -3,9 +3,9 @@
 # admin panel ui 
 ### query string while search
 ### send query string to AddCoin to come back if clicked cancel
-### Build AddCoin layout
 ### Build edit page
 ### Build the delete logic 
+### Show success or reject message after add/edit/delete coin
 
 
 # admin panel dynamic 
@@ -13,3 +13,16 @@
 # error handling
 
 # refactor code
+ 
+FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
+# check if storage ref exists or not in add edit page when deleting old file from store bucket
+
+# onReset "add form" also delete selected img from storage but not in update
+
+# delete related "coin long description" when deleting coin
+
+# update logic
+
+# if user uploaded into storage bucket new image url and then clicked cancel in form then restore previous image and delete last one from storage
+
+# when we switch from edit to add page typing manually to url and when we click reset on add page it doesn't delete img from storage

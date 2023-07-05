@@ -67,6 +67,46 @@ export const fetchDenominationUnits = async (queryString) => {
 
     return data;
   } catch (err) {
-    console.log(`Error on fetching denomination units: ${err}`);
+    console.error("Error occured:\nFetch denomination unit:\n", err);
+  }
+};
+
+export const addNewCoin = async (coinData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/add-coin`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(coinData),
+    });
+  } catch (err) {
+    console.error("Error occured:\nAdd coin:\n", err);
+  }
+};
+
+export const updateCoin = async (coinData, coinID) => {
+  try {
+    const res = await fetch(`${BASE_URL}/update-coin/${coinID}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(coinData),
+    });
+  } catch (err) {
+    console.error("Error occured:\nUpdate coin:\n", err);
+  }
+};
+
+export const deleteCoin = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}/delete/${id}`, {
+      method: "DELETE",
+    });
+    const info = await response.json();
+    return info;
+  } catch (err) {
+    console.error("Error occured:\nDelete coin:\n", err);
   }
 };

@@ -1,10 +1,17 @@
 const express = require("express");
+const multer = require("multer");
 const mysql = require("mysql");
 const cors = require("cors");
+const fs = require("fs");
+const { promisify } = require("util");
+const unlinkAsync = promisify(fs.unlink);
+
+// const fileUpload = require("express-fileupload");
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use(fileUpload());
 
 const PORT = 3001;
 
@@ -26,6 +33,148 @@ app.get("/categories", (req, res) => {
       throw err;
     }
     res.json(result);
+  });
+});
+
+/////////////////////////////////////////////////
+// add new coin
+app.post("/add-coin", (req, res) => {
+  const {
+    coin_name,
+    coin_category,
+    coin_denomination,
+    denomination_unit,
+    coin_year,
+    coin_price,
+    coin_country,
+    coin_composition,
+    coin_shortDesc,
+    coin_longDesc,
+    coin_quality,
+    coin_weight,
+    coin_img1,
+    coin_img2,
+  } = req.body;
+
+  const sqlCoins = `INSERT INTO coins (coin_name, coin_category,coin_denomination, coin_year, coin_price, coin_country, coin_composition, coin_shortDesc, coin_quality, coin_weight, coin_img1, coin_img2) VALUES ?;`;
+
+  const sqlLongDescription =
+    "INSERT INTO coin_descriptions (desc_coinId, desc_text) VALUES ?;";
+
+  const coinValues = [
+    [
+      coin_name,
+      coin_category,
+      `${coin_denomination} ${denomination_unit}`,
+      coin_year,
+      `${coin_price.trim() ? `${coin_price}$` : ""}`,
+      coin_country,
+      coin_composition,
+      coin_shortDesc,
+      coin_quality,
+      `${coin_weight.trim() ? `${coin_weight} g` : ""}`,
+      coin_img1,
+      coin_img2,
+    ],
+  ];
+
+  connection.query(sqlCoins, [coinValues], (err, result) => {
+    if (err) {
+      throw err;
+    }
+    // get last inserted id from coins table
+    const lastInsertedId = result.insertId;
+
+    // insert into coin descriptions table each text with last inserted coin id
+    const longDescValues = coin_longDesc.map((descObj) => {
+      return [lastInsertedId, descObj.text];
+    });
+
+    connection.query(sqlLongDescription, [longDescValues], (err, result2) => {
+      if (err) {
+        throw err;
+      }
+
+      res.status(200);
+    });
+  });
+});
+
+/////////////////////////////////////////////////
+// update coin
+app.post("/update-coin/:id", (req, res) => {
+  const { id } = req.params;
+  const {
+    coin_name,
+    coin_category,
+    coin_denomination,
+    denomination_unit,
+    coin_year,
+    coin_price,
+    coin_country,
+    coin_composition,
+    coin_shortDesc,
+    coin_longDesc,
+    coin_quality,
+    coin_weight,
+    coin_img1,
+    coin_img2,
+  } = req.body;
+  console.log(coin_longDesc);
+
+  const sqlCoins = `UPDATE coins SET coin_name='${coin_name}', coin_category='${coin_category}', coin_denomination='${coin_denomination} ${denomination_unit}', coin_year='${coin_year}', coin_price='${
+    coin_price.trim() ? `${coin_price}$` : ""
+  }', coin_country='${coin_country}', coin_composition='${coin_composition}', coin_shortDesc='${coin_shortDesc}', coin_quality='${coin_quality}', coin_weight='${
+    coin_weight.trim() ? `${coin_weight} g` : ""
+  }', coin_img1='${coin_img1}', coin_img2='${coin_img2}' WHERE id=${id};`;
+
+  const sqlLongDescription = `INSERT INTO coin_descriptions (desc_id, desc_coinId, desc_text) VALUES ? ON DUPLICATE KEY UPDATE desc_text=VALUES(desc_text);`;
+
+  // insert into coin descriptions table each text with last inserted coin id
+  const longDescValues = coin_longDesc.map((descObj) => {
+    return [descObj.desc_id, descObj.desc_coinId, descObj.text];
+  });
+
+  connection.query(sqlCoins, (err, result) => {
+    if (err) {
+      throw err;
+    }
+
+    connection.query(sqlLongDescription, [longDescValues], (err, result2) => {
+      if (err) {
+        throw err;
+      }
+
+      res.status(200);
+    });
+  });
+});
+
+///////////////////////////////////////////////////////////
+// delete coin
+app.delete("/delete/:id", (req, res) => {
+  const { id } = req.params;
+  connection.query(`DELETE FROM coins WHERE id=?`, [id], (err, result) => {
+    if (err) {
+      throw err;
+    }
+
+    if (result.affectedRows === 0) {
+      res.status(404).json({ id: null });
+      return;
+    }
+
+    connection.query(
+      `DELETE FROM coin_descriptions WHERE desc_coinId=?`,
+      [id],
+      (err, result) => {
+        if (err) {
+          throw err;
+        }
+
+        res.status(200).json({ id });
+      }
+    );
   });
 });
 
@@ -60,6 +209,46 @@ app.get("/coins/columns", (req, res) => {
   });
 });
 
+app.get("/coins/denomination/units", (req, res) => {
+  const searchQuery = req.query.s;
+
+  connection.query(
+    `Select MIN(id) as id, coin_denomination FROM coins GROUP BY coin_denomination;`,
+    (err, result) => {
+      if (err) {
+        throw err;
+      }
+
+      // we create an array of units of  denomination values by separating digit from each value
+      const units = result.map(({ id, coin_denomination }) => {
+        return {
+          id,
+          denomination_unit: coin_denomination.split(" ").slice(1).join(" "),
+        };
+      });
+
+      // create an array from units that match search query
+      const searchedUnits = units.filter(({ denomination_unit }) =>
+        denomination_unit.startsWith(searchQuery)
+      );
+
+      // Create array of objects based unique unit value
+      const uniqueUnits = [];
+
+      for (const { id, denomination_unit } of searchedUnits) {
+        const exists = uniqueUnits.some(
+          (obj) => obj.denomination_unit === denomination_unit
+        );
+
+        if (!exists) {
+          uniqueUnits.push({ id, denomination_unit });
+        }
+      }
+      res.json(uniqueUnits);
+    }
+  );
+});
+
 app.get("/coins/:id", (req, res) => {
   const coinId = req.params.id;
 
@@ -69,6 +258,8 @@ app.get("/coins/:id", (req, res) => {
       if (err) {
         throw err;
       }
+      const coin_denomination = result[0].coin_denomination.split(" ")[0];
+      const denomination_unit = result[0].coin_denomination.split(" ")[1];
 
       connection.query(
         `SELECT * FROM coin_descriptions WHERE desc_coinId='${coinId}';`,
@@ -77,7 +268,14 @@ app.get("/coins/:id", (req, res) => {
             throw err;
           }
 
-          result = [{ ...result[0], descriptions: result2 }];
+          result = [
+            {
+              ...result[0],
+              coin_denomination,
+              denomination_unit,
+              descriptions: result2,
+            },
+          ];
           res.json(result);
         }
       );
@@ -85,16 +283,6 @@ app.get("/coins/:id", (req, res) => {
   );
 });
 
-// {
-//   searchInput: "",
-//   coin_country: "",
-//   coin_price_min: "",
-//   coin_price_max: "",
-//   coin_composition: "",
-//   coin_year_min: "",
-//   coin_year_max: "",
-//   coin_quality: "",
-// }
 app.post("/search", (req, res) => {
   // destructure search details from requested body
   let {

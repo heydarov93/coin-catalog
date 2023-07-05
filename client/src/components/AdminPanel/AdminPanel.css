@@ -179,3 +179,82 @@
   height: 1.6rem;
   z-index: 99999;
 }
+
+/* Add image section */
+.UploadedImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.AddImg {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5.6rem;
+
+  height: 33.2rem;
+  margin-bottom: 12.8rem;
+}
+
+.UploadWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3rem;
+}
+
+.UploadWrapper .ant-upload-picture-circle-wrapper {
+  flex: 1 1 12rem;
+}
+
+.UploadWrapper .ant-upload-select {
+  width: 12rem !important;
+  height: 12rem !important;
+  margin: 0 !important;
+}
+
+.Warning .ant-upload {
+  border-color: red !important;
+}
+
+.Warning .ant-upload:hover {
+  border-color: #2d84ff !important;
+}
+
+.UploadWrapper .UploadLabel {
+  font-size: 1.4rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Add Edit buttons styles*/
+.AddEdit_BTNWrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 3rem;
+}
+
+.AddEditBTN {
+  flex: 0 1 12rem;
+  font-size: 1.4rem;
+  padding: 1.2rem;
+  height: 4.8rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.SaveBTN {
+  background: #833ae0;
+  color: #fff;
+}
+
+.CancelBTN {
+  background: #e1e1e1;
+}
+
+.AddEditBTN:hover {
+  filter: brightness(0.9);
+}

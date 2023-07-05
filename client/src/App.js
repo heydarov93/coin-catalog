@@ -30,7 +30,7 @@ function App() {
           <Route path="admin">
             <Route index element={<AdminPanel />} />
             <Route path="add" element={<AddEditCoin />} />
-            <Route path="edit" element={<AddEditCoin />} />
+            <Route path="edit/:id" element={<AddEditCoin />} />
           </Route>
           {/* Coins route  */}
           <Route path="/coins">

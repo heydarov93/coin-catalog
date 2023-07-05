@@ -5,11 +5,15 @@ const CoinCategoryInput = ({
   label,
   categories,
   onChange,
+  className = "",
 }) => {
   return (
-    <div className="Form_Control">
+    <div className={`Form_Control ${className}`}>
       <label className="Form_Label" htmlFor={id}>
         {label}
+        {className === "Warning" && (
+          <span style={{ color: "#ff0000" }}>Must be selected</span>
+        )}
       </label>
       <div className="Form_InputBox SelectInput">
         <select
@@ -27,6 +31,7 @@ const CoinCategoryInput = ({
               </option>
             );
           })}
+          <option value="0">None</option>
         </select>
       </div>
     </div>
